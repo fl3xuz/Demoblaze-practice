@@ -3,6 +3,7 @@ package pages;
 import elements.Button;
 import com.codeborne.selenide.Condition;
 import static com.codeborne.selenide.Selenide.*;
+import static utils.Constants.*;
 
 /**
  * Класс, представляющий страницу отдельного товара на сайте.
@@ -14,23 +15,23 @@ public class ProductPage extends BasePage {
     }
 
     public void clickAddToCart() {
-        new Button($(".btn-success")).click();
+        new Button($(ADD_TO_CART_BTN)).click();
     }
 
     public boolean isTitleCorrect(String name) {
-        return $(".name").has(Condition.text(name));
+        return $(PRODUCT_NAME_SELECTOR).has(Condition.text(name));
     }
 
     public boolean isPriceCorrect(String price) {
-        return $(".price-container").shouldBe(Condition.visible).has(Condition.text(price));
+        return $(PRODUCT_PRICE_SELECTOR).shouldBe(Condition.visible).has(Condition.text(price));
     }
 
     public boolean isDescriptionVisible() {
-        return $("#more-information").shouldBe(Condition.visible).is(Condition.visible);
+        return $(PRODUCT_DESC_SELECTOR).shouldBe(Condition.visible).is(Condition.visible);
     }
 
     public boolean isAddToCartButtonVisible() {
-        return new Button($(".btn-success")).isDisplayed();
+        return new Button($(ADD_TO_CART_BTN)).isDisplayed();
     }
 
     public void acceptAlert() {

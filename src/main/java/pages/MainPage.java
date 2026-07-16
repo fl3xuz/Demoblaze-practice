@@ -3,6 +3,7 @@ package pages;
 import elements.Button;
 import com.codeborne.selenide.Condition;
 import static com.codeborne.selenide.Selenide.*;
+import static utils.Constants.*;
 
 /**
  * Класс, представляющий главную страницу сайта Demoblaze.
@@ -21,7 +22,7 @@ public class MainPage extends BasePage {
     }
 
     public void goToCart() {
-        new Button($("#cartur")).click();
+        new Button($(CART_MENU_LINK)).click();
     }
 
     public boolean isProductVisible(String productName) {
@@ -34,8 +35,8 @@ public class MainPage extends BasePage {
     }
 
     public boolean isTitleCorrect(String expectedText) {
-        return $("h2").has(Condition.text(expectedText));
+        return $(H2_TITLE).has(Condition.text(expectedText));
     }
 
-    public void clickHome() { new Button($("#nava")).click(); }
+    public void clickHome() { new Button($(HOME_LINK)).click(); }
 }

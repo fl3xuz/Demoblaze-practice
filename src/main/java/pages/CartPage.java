@@ -4,6 +4,7 @@ import elements.Button;
 import elements.Input;
 import com.codeborne.selenide.Condition;
 import static com.codeborne.selenide.Selenide.*;
+import static utils.Constants.*;
 
 /**
  * Класс, представляющий страницу корзины (Cart).
@@ -12,15 +13,15 @@ import static com.codeborne.selenide.Selenide.*;
  */
 public class CartPage extends BasePage {
 
-    private final Button placeOrderBtn = new Button($(".btn-success"));
-    private final Button purchaseBtn = new Button($("#orderModal .btn-primary"));
-    private final Button closeBtn = new Button($("#orderModal .close"));
-    private final Input nameInput = new Input($("#name"));
-    private final Input countryInput = new Input($("#country"));
-    private final Input cityInput = new Input($("#city"));
-    private final Input cardInput = new Input($("#card"));
-    private final Input monthInput = new Input($("#month"));
-    private final Input yearInput = new Input($("#year"));
+    private final Button placeOrderBtn = new Button($(BTN_PLACE_ORDER));
+    private final Button purchaseBtn = new Button($(BTN_PURCHASE));
+    private final Button closeBtn = new Button($(BTN_CLOSE));
+    private final Input nameInput = new Input($(INPUT_NAME));
+    private final Input countryInput = new Input($(INPUT_COUNTRY));
+    private final Input cityInput = new Input($(INPUT_CITY));
+    private final Input cardInput = new Input($(INPUT_CARD));
+    private final Input monthInput = new Input($(INPUT_MONTH));
+    private final Input yearInput = new Input($(INPUT_YEAR));
 
     public static CartPage init() { return page(CartPage.class); }
     public void clickPlaceOrder() { placeOrderBtn.click(); }
@@ -43,28 +44,28 @@ public class CartPage extends BasePage {
         return $x("//td[text()='" + name + "']").is(Condition.visible);
     }
     public boolean isCartEmpty() {
-        return $("#tbodyid").has(Condition.empty);
+        return $(TBODY_ID).has(Condition.empty);
     }
     public boolean isPurchaseSuccessVisible() {
-        return $(".sweet-alert").shouldBe(com.codeborne.selenide.Condition.visible).isDisplayed();
+        return $(SWEET_ALERT).shouldBe(com.codeborne.selenide.Condition.visible).isDisplayed();
     }
 
     public boolean isCartTableVisible() {
-        return $("#tbodyid").is(Condition.visible);
+        return $(TBODY_ID).is(Condition.visible);
     }
 
     public boolean isPlaceOrderButtonVisible() {
-        return new Button($(".btn-success")).isDisplayed();
+        return new Button($(BTN_PLACE_ORDER)).isDisplayed();
     }
 
     public boolean areHeadersVisible() {
-        return $(".table").shouldBe(Condition.visible).has(Condition.text("Pic")) &&
-                $(".table").has(Condition.text("Title")) &&
-                $(".table").has(Condition.text("Price"));
+        return $(TABLE).shouldBe(Condition.visible).has(Condition.text(PIC)) &&
+                $(TABLE).has(Condition.text(TITLE)) &&
+                $(TABLE).has(Condition.text(COST));
     }
 
     public boolean isPlaceOrderModalVisible() {
-        return $("#orderModal").shouldBe(com.codeborne.selenide.Condition.visible).isDisplayed();
+        return $(MODAL_ORDER).shouldBe(com.codeborne.selenide.Condition.visible).isDisplayed();
     }
 
 }
